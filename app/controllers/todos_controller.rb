@@ -3,7 +3,8 @@ class TodosController < ApplicationController
 
   # GET /todos or /todos.json
   def index
-    @todos = Todo.all.order(position: :desc)
+    @is_done = ActiveModel::Type::Boolean.new.cast(params[:is_done]) || false
+    @todos = Todo.where(is_done: @is_done).order(position: :desc)
   end
 
   # GET /todos/1 or /todos/1.json
@@ -61,10 +62,16 @@ class TodosController < ApplicationController
 
   def complete
     @todo.update(is_done: true)
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("#{helpers.dom_id(@todo)}_item") }
+    end
   end
 
   def uncomplete
     @todo.update(is_done: false)
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("#{helpers.dom_id(@todo)}_item") }
+    end
   end
 
   private
