@@ -1,17 +1,9 @@
-<div id="<%= dom_id todo %>">
-  <p>
-    <strong>Title:</strong>
-    <%= todo.title %>
-  </p>
-
-  <p>
-    <strong>Position:</strong>
-    <%= todo.position %>
-  </p>
-
-  <p>
-    <strong>Is done:</strong>
-    <%= todo.is_done %>
-  </p>
-
-</div>
+<li id='<%= "#{dom_id(todo)}_item" %>' class='mt-1'>
+  <%= turbo_frame_tag dom_id(todo) do %>
+    <div class='is-flex is-fullwidth is-flex-direction-row is-align-content-space-between is-align-items-center'>
+      <%= check_box_tag :is_done, "1", todo.is_done, disabled: true %>
+      <%= link_to todo.title, edit_todo_path(todo), class: 'ml-2' %>
+      <%= button_to 'Usuń', todo_path(todo), class: 'ml-2 button is-danger', method: :delete %>
+    </div>
+  <% end %>
+</li>
