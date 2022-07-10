@@ -31,6 +31,7 @@ class TodosController < ApplicationController
         format.json { render :show, status: :created, location: @todo }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace("#{helpers.dom_id(@todo)}_form", partial: 'form', locals: { todo: @todo } ) }
+        format.html { render :edit }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end

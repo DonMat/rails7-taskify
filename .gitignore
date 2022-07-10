@@ -45,3 +45,5 @@ config/sidekiq.yml
 /config/credentials/staging.key
 /config/credentials/test.key
 .rbenv-gemsets
+/coverage
+dump.rdb

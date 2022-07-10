@@ -18,11 +18,11 @@ RSpec.describe "/todos", type: :request do
   # Todo. As you add validations to Todo, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { title: 'test'}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { title: '' }
   }
 
   describe "GET /index" do
@@ -64,10 +64,6 @@ RSpec.describe "/todos", type: :request do
         }.to change(Todo, :count).by(1)
       end
 
-      it "redirects to the created todo" do
-        post todos_url, params: { todo: valid_attributes }
-        expect(response).to redirect_to(todo_url(Todo.last))
-      end
     end
 
     context "with invalid parameters" do
@@ -77,41 +73,24 @@ RSpec.describe "/todos", type: :request do
         }.to change(Todo, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
-        post todos_url, params: { todo: invalid_attributes }
-        expect(response).to be_successful
-      end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { title: 'new' }
       }
 
       it "updates the requested todo" do
         todo = Todo.create! valid_attributes
         patch todo_url(todo), params: { todo: new_attributes }
         todo.reload
-        skip("Add assertions for updated state")
+        expect(todo.title).to eq new_attributes[:title]
       end
 
-      it "redirects to the todo" do
-        todo = Todo.create! valid_attributes
-        patch todo_url(todo), params: { todo: new_attributes }
-        todo.reload
-        expect(response).to redirect_to(todo_url(todo))
-      end
     end
 
-    context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
-        todo = Todo.create! valid_attributes
-        patch todo_url(todo), params: { todo: invalid_attributes }
-        expect(response).to be_successful
-      end
-    end
   end
 
   describe "DELETE /destroy" do
