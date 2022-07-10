@@ -17,7 +17,7 @@
   <% end %>
 
   <%= turbo_stream_from "todos" %>
-  <ul id="todos">
+  <ul id="todos" data-controller="sortable" data-sortable-resource-name-value='todo' data-sortable-response-kind-value="json" data-sortable-animation-value="150" data-sortable-handle-value=".sortable-handle">
     <%= render @todos %>
   </ul>
 <% end %>

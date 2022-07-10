@@ -4,7 +4,7 @@ class TodosController < ApplicationController
   # GET /todos or /todos.json
   def index
     @is_done = ActiveModel::Type::Boolean.new.cast(params[:is_done]) || false
-    @todos = Todo.where(is_done: @is_done).order(position: :desc)
+    @todos = Todo.where(is_done: @is_done).order(position: :asc)
   end
 
   # GET /todos/1 or /todos/1.json

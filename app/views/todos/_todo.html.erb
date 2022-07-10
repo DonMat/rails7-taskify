@@ -1,12 +1,12 @@
-<li id='<%= "#{dom_id(todo)}_item" %>' class='mt-1'>
+<li id='<%= "#{dom_id(todo)}_item" %>' class='mt-1 is-flex is-flex-1' data-sortable-update-url="<%= todo_path(todo) %>"  >
   <%= turbo_frame_tag dom_id(todo) do %>
-    <div class='is-flex is-fullwidth is-flex-direction-row is-align-content-space-between is-align-items-center'>
+    <div class='is-flex is-fullwidth is-flex-direction-row is-align-content-space-between is-align-items-center sortable-handle'>
       <%= check_box_tag :is_done, "1", todo.is_done, disabled: true %>
       <%= link_to todo.title, edit_todo_path(todo), class: 'ml-2' %>
       <% if todo.is_done? %>
-        <%= button_to 'Cofnij', uncomplete_todo_path(todo), class: 'ml-2 button is-danger', method: :delete %>
+        <%= button_to 'Cofnij', uncomplete_todo_path(todo), class: 'ml-2 button is-warning', method: :delete %>
       <% else %>
-        <%= button_to 'Wykonane', complete_todo_path(todo), class: 'ml-2 button is-danger', method: :post %>
+        <%= button_to 'Wykonane', complete_todo_path(todo), class: 'ml-2 button is-success', method: :post %>
       <% end %>
       <%= button_to 'Usuń', todo_path(todo), class: 'ml-2 button is-danger', method: :delete %>
     </div>

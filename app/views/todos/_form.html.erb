@@ -22,6 +22,6 @@
   </div>
 
   <div>
-    <%= form.submit 'Dodaj', class: 'button is-link' %>
+    <%= form.submit todo.persisted? ? 'Zapisz' : 'Dodaj', class: 'button is-link' %>
   </div>
 <% end %>

@@ -3,6 +3,8 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
+import Sortable from 'stimulus-sortable'
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+application.register('sortable', Sortable)
