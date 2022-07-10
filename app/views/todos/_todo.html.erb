@@ -3,6 +3,11 @@
     <div class='is-flex is-fullwidth is-flex-direction-row is-align-content-space-between is-align-items-center'>
       <%= check_box_tag :is_done, "1", todo.is_done, disabled: true %>
       <%= link_to todo.title, edit_todo_path(todo), class: 'ml-2' %>
+      <% if todo.is_done? %>
+        <%= button_to 'Cofnij', uncomplete_todo_path(todo), class: 'ml-2 button is-danger', method: :delete %>
+      <% else %>
+        <%= button_to 'Wykonane', complete_todo_path(todo), class: 'ml-2 button is-danger', method: :post %>
+      <% end %>
       <%= button_to 'Usuń', todo_path(todo), class: 'ml-2 button is-danger', method: :delete %>
     </div>
   <% end %>

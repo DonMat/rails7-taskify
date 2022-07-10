@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: %i[ show edit update destroy ]
+  before_action :set_todo, only: %i[ show edit update destroy complete uncomplete]
 
   # GET /todos or /todos.json
   def index
@@ -57,6 +57,14 @@ class TodosController < ApplicationController
       format.html { redirect_to todos_url, notice: "Todo was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def complete
+    @todo.update(is_done: true)
+  end
+
+  def uncomplete
+    @todo.update(is_done: false)
   end
 
   private

@@ -6,6 +6,7 @@
   <%= render 'form', todo: Todo.new %>
 </div>
 
+<%= turbo_stream_from "todos" %>
 <ul id="todos">
   <%= render @todos %>
 </ul>
